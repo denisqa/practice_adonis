@@ -11,21 +11,20 @@ class TypesController {
 
   async addType({ request, response }) {
     const data = request.all();
-    await Type.add(data);
-    return response.json();
+    response.status(201);
+    return await Type.add(data);
   }
 
   async updateType({ request, response, params }) {
     const { id } = params;
     const data = request.all();
-    await Type.update(id, data);
-    return response.json({ result: `Type with id=${id} updated` });
+    return await Type.update(id, data);
   }
 
   async deleteType({ params, response }) {
     const { id } = params;
     await Type.delete(id);
-    return response.json({ result: `Type with id=${id} deleted` });
+    return response.json({ message: `Type with id=${id} deleted` });
   }
 }
 
