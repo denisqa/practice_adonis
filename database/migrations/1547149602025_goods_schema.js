@@ -36,7 +36,7 @@ class GoodsSchema extends Schema {
   }
 
   down () {
-    this.drop('product_attributes');
+    this.drop('parameters');
     this.drop('goods');
     this.drop('attributes');
     this.drop('types');

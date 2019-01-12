@@ -8,10 +8,6 @@ class Attribute extends Model {
     static get createdAtColumn(){
         return null;
     }
-
-    type() {
-        this.belongsTo('App/Models/Type');
-    }
 }
 
 module.exports = Attribute
