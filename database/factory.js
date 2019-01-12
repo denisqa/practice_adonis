@@ -10,3 +10,10 @@ Factory.blueprint('App/Models/Attribute', async (faker, i, data) => ({
   name: faker.string({ length: 7 }),
   type_id: data
 }));
+
+Factory.blueprint('App/Models/Good', async (faker, i, data) => ({
+  name: faker.string({ length: 7 }),
+  price: faker.integer({ min: 200, max: 2000 }),
+  user_id: data.user.id,
+  type_id: data.type.id
+}));
