@@ -1,8 +1,8 @@
 class AddUpdateType {
-  get rules () {
+  get rules() {
     return {
       name: 'required|max:60'
-    }
+    };
   }
 }
 

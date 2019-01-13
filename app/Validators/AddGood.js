@@ -1,7 +1,7 @@
 const Validator = use('Validator');
 const Type = use('App/Models/Type');
 
-const attrsFn = async(data, field, message) => {
+const attrsFn = async (data, field, message) => {
   const { type_id: typeId, attributes } = data;
   const type = await Type.findOrFail(typeId);
   const { rows: typeAttrs } = await type.attribute().fetch();
@@ -13,32 +13,32 @@ const attrsFn = async(data, field, message) => {
       attributesList[key] = attr[key];
     }
   }
-  if(typeAttrs.length !== attributes.length){
+  if (typeAttrs.length !== attributes.length) {
     fails = true;
   }
   typeAttrs.forEach(typeAttr => {
-    if(attributesList[typeAttr.id] === undefined){
+    if (attributesList[typeAttr.id] === undefined) {
       fails = true;
-      message = `Attribute ${typeAttr.id} does not exist.`
+      message = `Attribute ${typeAttr.id} does not exist.`;
     }
-  })
-  
-  if(fails){
+  });
+
+  if (fails) {
     throw message;
   }
-}
+};
 
 Validator.extend('attrs', attrsFn);
 
 class AddGood {
-  get rules () {
+  get rules() {
     return {
       name: 'required|max: 60',
       price: 'required',
       type_id: 'required',
       user_id: 'required',
       attributes: 'required|attrs'
-    }
+    };
   }
 }
 

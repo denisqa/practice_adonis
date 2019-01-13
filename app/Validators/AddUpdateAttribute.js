@@ -1,9 +1,9 @@
 class AddUpdateAttribute {
-  get rules () {
+  get rules() {
     return {
       name: 'required|max:60',
       type_id: 'required'
-    }
+    };
   }
 }
 
