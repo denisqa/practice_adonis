@@ -1,11 +1,4 @@
 const Model = use('App/Models/Good');
-for (const attr of attributes) {
-  for (const key in attr) {
-    good.attribute().attach(key, row => {
-      row.value = attr[key];
-    });
-  }
-}
 const Attribute = use('App/Models/Attribute');
 
 class Good {

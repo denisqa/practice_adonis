@@ -1,21 +1,36 @@
 const User = use('App/Models/User');
+const Role = use('Role');
 
 class UserSeeder {
   async run() {
     await User.query().delete();
-    const users = [
-      {
-        username: 'authUser',
-        email: '123@mail.com',
-        password: '12345'
-      },
-      {
-        username: 'admin',
-        email: 'admin@mail.com',
-        password: '12345'
-      }
-    ];
-    await User.createMany(users);
+    await Role.query().delete();
+
+    const roleAdmin = new Role();
+    roleAdmin.role = 'Admin';
+    roleAdmin.slug = 'admin';
+    roleAdmin.description = 'manage administration privileges';
+    await roleAdmin.save();
+
+    const roleUser = new Role();
+    roleUser.role = 'User';
+    roleUser.slug = 'user';
+    roleUser.description = 'manage user privileges';
+    await roleUser.save();
+
+    const admin = await User.create({
+      username: 'admin',
+      email: 'admin@mindk.com',
+      password: '123456'
+    });
+    await admin.roles().attach([roleAdmin.id]);
+
+    const user = await User.create({
+      username: 'user',
+      email: 'user@mindk.com',
+      password: '123456'
+    });
+    await user.roles().attach([roleUser.id]);
   }
 }
 
