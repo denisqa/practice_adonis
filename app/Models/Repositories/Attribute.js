@@ -1,28 +1,42 @@
-const Model = use('App/Models/Attribute');
+const Type = use('App/Models/Type');
 
 class Attribute {
-  static async add(data) {
-    const attribute = new Model();
+  static async findAttributes(typeId) {
+    const type = await Type.findOrFail(typeId);
+    return type.attribute().fetch();
+  }
 
-    for (const key in data) {
-      attribute[key] = data[key];
-    }
+  static async findAttribute(typeId, id) {
+    const type = await Type.findOrFail(typeId);
+    return type
+      .attribute()
+      .where('id', id)
+      .fetch();
+  }
+
+  static async add(typeId, name) {
+    const type = await Type.findOrFail(typeId);
+    return type.attribute().create({ name });
+  }
+
+  static async update(typeId, id, name) {
+    const type = await Type.findOrFail(typeId);
+    const attribute = await type
+      .attribute()
+      .where('id', id)
+      .firstOrFail();
+    attribute.merge({ name });
     await attribute.save();
     return attribute;
   }
 
-  static async update(id, data) {
-    const attribute = await Model.findOrFail(id);
-    for (const key in data) {
-      attribute[key] = data[key];
-    }
-    await attribute.save();
-    return attribute;
-  }
-
-  static async delete(id) {
-    const attribute = await Model.findOrFail(id);
-    attribute.delete();
+  static async delete(typeId, id) {
+    const type = await Type.findOrFail(typeId);
+    const attribute = await type
+      .attribute()
+      .where('id', id)
+      .firstOrFail();
+    await attribute.delete();
   }
 }
 

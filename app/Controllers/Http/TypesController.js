@@ -4,7 +4,7 @@ class TypesController {
     return Type.all();
   }
 
-  async loadTypes({ request, params }) {
+  async loadTypes({ params }) {
     const { id } = params;
     return Type.findOrFail(id);
   }
@@ -12,19 +12,20 @@ class TypesController {
   async addType({ request, response }) {
     const data = request.all();
     response.status(201);
-    return await Type.add(data);
+    return Type.add(data);
   }
 
-  async updateType({ request, response, params }) {
+  async updateType({ request, params }) {
     const { id } = params;
     const data = request.all();
-    return await Type.update(id, data);
+    return Type.update(id, data);
   }
 
   async deleteType({ params, response }) {
     const { id } = params;
     await Type.delete(id);
-    return response.json({ message: `Type with id=${id} deleted` });
+    response.status(204);
+    return response.json();
   }
 }
 

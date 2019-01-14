@@ -1,10 +1,11 @@
 const Good = use('App/Models/Good');
 class GoodsController {
-  async loadAllGoods() {
-    return Good.all();
+  async loadAllGoods({ request }) {
+    const data = request.all();
+    return Good.findGoods(data);
   }
 
-  async loadGoods({ request, params }) {
+  async loadGoods({ params }) {
     const { id } = params;
     return Good.findOrFail(id);
   }
@@ -12,19 +13,20 @@ class GoodsController {
   async addGoods({ request, response }) {
     const data = request.all();
     response.status(201);
-    return await Good.add(data);
+    return Good.add(data);
   }
 
-  async updateGoods({ request, response, params }) {
+  async updateGoods({ request, params }) {
     const { id } = params;
     const data = request.all();
-    return await Good.update(id, data);
+    return Good.update(id, data);
   }
 
   async deleteGood({ params, response }) {
     const { id } = params;
     await Good.delete(id);
-    return response.json({ message: `Good with id=${id} deleted` });
+    response.status(204);
+    return response.json();
   }
 }
 

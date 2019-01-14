@@ -1,11 +1,6 @@
-const Model = use('Model');
+const Main = require('./Main.js');
 
-class Type extends Model {
-  static boot() {
-    super.boot();
-    this.addTrait('App/Models/Traits/Repository');
-  }
-
+class Type extends Main {
   static get updatedAtColumn() {
     return null;
   }
