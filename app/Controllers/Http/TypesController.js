@@ -1,4 +1,5 @@
 const Type = use('App/Models/Type');
+
 class TypesController {
   async loadAllTypes() {
     return Type.all();

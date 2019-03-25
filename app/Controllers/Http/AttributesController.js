@@ -1,4 +1,5 @@
 const Attribute = use('App/Models/Attribute');
+
 class AttributesController {
   async loadAllAttributes({ params }) {
     const { type_id: typeId } = params;

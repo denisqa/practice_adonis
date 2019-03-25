@@ -1,4 +1,5 @@
 const Good = use('App/Models/Good');
+
 class GoodsController {
   async loadAllGoods({ request }) {
     const data = request.all();
