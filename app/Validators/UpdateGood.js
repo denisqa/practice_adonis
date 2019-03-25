@@ -13,6 +13,7 @@ const attrsFn = async (data, field, message) => {
       attributesList[key] = attr[key];
     }
   }
+
   typeAttrs.forEach(typeAttr => {
     if (attributesList[typeAttr.id] === undefined) {
       fails = true;

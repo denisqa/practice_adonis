@@ -19,6 +19,7 @@ Route.group(() => {
   Route.delete('/types/:id', 'TypesController.deleteType');
 }).middleware(['auth', 'is:admin']);
 
+
 Route.get('/goods', 'GoodsController.loadAllGoods');
 Route.get('/goods/:id', 'GoodsController.loadGoods');
 
