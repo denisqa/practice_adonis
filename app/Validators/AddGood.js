@@ -10,9 +10,7 @@ const attrsFn = async (data, field, message) => {
   const attributesList = [];
   for (const attr of attributes) {
     for (const key in attr) {
-      if (attributesList.hasOwnProperty(key)) {
-        attributesList[key] = attr[key];
-      }
+      attributesList[key] = attr[key];
     }
   }
   if (typeAttrs.length !== attributes.length) {
